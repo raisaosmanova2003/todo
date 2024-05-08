@@ -1,12 +1,15 @@
 
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
   const [inputVal, setInputVal] = useState("")
-  const [task, setTask] = useState([])
+  const [task, setTask] = useState(localStorage.getItem("task")? JSON.parse(localStorage.getItem("task")):[])
 
+  useEffect(()=>{
+    localStorage.setItem("task", JSON.stringify(task),[task])
+  })
   const handleInp = (e) => {
     setInputVal(e.target.value)
   }
